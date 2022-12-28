@@ -15,7 +15,7 @@ var data = [
 
 var margin = {top: 50, right: 50, bottom: 50, left: 100},
   width = 800 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+  height = 450 - margin.top - margin.bottom;
 h = height - 50;
 var svg = d3
   .select("#gantt")
