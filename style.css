@@ -1,3 +1,11 @@
 .gantt {
   fill: red;
 }
+.axis2 .domain {
+  display: none;
+}
+
+#gantt {
+  overflow-x: scroll;
+  width: 700px;
+}
