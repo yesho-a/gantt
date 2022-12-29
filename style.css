@@ -10,6 +10,7 @@
   background-color: rgb(238, 230, 230);
   padding: 2rem;
   overflow-x: scroll;
+  overflow-y: scroll;
 }
 .tasks {
   font-weight: bold;

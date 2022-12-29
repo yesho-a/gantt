@@ -65,15 +65,13 @@ let y = d3
   .scaleBand()
   .domain(data.map((task) => task.category))
   .range([0, h - margin.bottom]);
-ticks = data.length + 2;
+
 let xAxis = d3
   .axisBottom(x)
-  .ticks(8)
   .tickFormat(d3.timeFormat("%b-%d"))
   .tickSize(3)
   .tickPadding(10)
-
-  .tickSizeInner([0]);
+  .tickSizeInner([3]);
 
 var yAxis = d3.axisLeft(y).ticks(data.length).tickSize(0).tickPadding(10);
 
