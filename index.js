@@ -36,7 +36,7 @@ let color = ["gray", "white"];
 var margin = {top: 50, right: 0, bottom: 50, left: 100},
   width = 900 - margin.left - margin.right,
   height = 450 - margin.top - margin.bottom;
-h = height - 50;
+h = data.length * 50;
 
 function getRandomColor() {
   var letters = "0123456789ABCDEF".split("");
@@ -64,7 +64,7 @@ x.domain([
 let y = d3
   .scaleBand()
   .domain(data.map((task) => task.category))
-  .range([0, h - margin.bottom]);
+  .range([0, h]);
 
 let xAxis = d3
   .axisBottom(x)
@@ -72,7 +72,6 @@ let xAxis = d3
   .tickSize(3)
   .tickPadding(10)
   .tickSizeInner([3]);
-
 var yAxis = d3.axisLeft(y).ticks(data.length).tickSize(0).tickPadding(10);
 
 var svg = d3
@@ -89,17 +88,15 @@ svg
   .attr("transform", "translate(0,250)")
   .call(xAxis);
 
-svg.append("g").attr("class", "axis2").call(yAxis);
-
 let rect = svg
   .selectAll("rect")
   .data(data)
   .enter()
   .append("g")
   .append("rect")
-  .attr("width", width)
+  .attr("width", width + 100)
   .attr("height", 50)
-  .attr("x", 0)
+  .attr("x", -100)
   .attr("y", function (d, i) {
     return i * 50;
   })
@@ -145,7 +142,7 @@ svg
   .attr("x", -100)
   .attr("y", 0)
   .attr("width", 100)
-  .attr("height", h - 50)
+  .attr("height", h)
   .attr("stroke", "black")
   .attr("stroke-width", 0.2)
   .attr("fill", "transparent");
@@ -185,3 +182,5 @@ svg
   .text("Simple Gantt Chart")
   .attr("x", width / 2 - 100)
   .attr("y", -15);
+
+svg.append("g").attr("class", "axis2").call(yAxis);
