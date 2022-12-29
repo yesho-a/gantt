@@ -1,11 +1,16 @@
-.gantt {
-  fill: red;
-}
-.axis2 .domain {
-  display: none;
+.rect {
+  margin-top: 12px;
 }
 
-/* #gantt {
+.axis2 {
+  font-weight: bolder;
+  color: rgb(26, 23, 23);
+}
+#gantt {
+  background-color: rgb(238, 230, 230);
+  padding: 2rem;
   overflow-x: scroll;
-  width: 700px;
-} */
+}
+.tasks {
+  font-weight: bold;
+}
