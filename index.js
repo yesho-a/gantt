@@ -8,7 +8,7 @@ var data = [
     progress: 100,
   },
   {
-    category: "Check on Banana",
+    category: "Check on Banana in kaptogolo",
     from: "13-Jan-17",
     to: "1-Feb-17",
     progress: 60,
@@ -156,7 +156,7 @@ svg
   .append("rect")
   .attr("x", -100)
   .attr("y", 0)
-  .attr("width", 140)
+  .attr("width", 145)
   .attr("height", h - 100)
   .attr("stroke", "black")
   .attr("stroke-width", 0.5)
@@ -167,7 +167,7 @@ let tasks = svg
   .append("rect")
   .attr("x", -100)
   .attr("y", -35)
-  .attr("width", 140)
+  .attr("width", 145)
   .attr("height", 35)
   .attr("stroke", "black")
   .attr("stroke-width", 0.9)
@@ -183,9 +183,9 @@ svg
 svg
   .append("g")
   .append("rect")
-  .attr("x", 40)
+  .attr("x", 45)
   .attr("y", -35)
-  .attr("width", width - 40)
+  .attr("width", width - 45)
   .attr("height", 35)
   .attr("stroke", "black")
   .attr("stroke-width", 0.9)
