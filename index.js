@@ -2,7 +2,7 @@ var parseDate = d3.timeParse("%d-%b-%y");
 
 var data = [
   {
-    category: "Weed Eucalyptus",
+    category: "Weed Eucalyptus in chepterit",
     from: "1-Jan-17",
     to: "15-Jan-17",
     progress: 100,
@@ -31,12 +31,25 @@ var data = [
     to: "30-Apr-17",
     progress: 90,
   },
+  {
+    category: "Testing",
+    from: "1-Mar-17",
+    to: "30-May-17",
+    progress: 90,
+  },
+  {
+    category: "Admin Lte",
+    from: "1-May-17",
+    to: "20-Jul-17",
+    progress: 90,
+  },
 ];
 let color = ["gray", "white"];
 var margin = {top: 50, right: 0, bottom: 50, left: 100},
   width = 900 - margin.left - margin.right,
   height = 450 - margin.top - margin.bottom;
-h = data.length * 50;
+h = data.length * 50 + 100;
+barH = 50;
 
 function getRandomColor() {
   var letters = "0123456789ABCDEF".split("");
@@ -51,7 +64,7 @@ data.forEach(function (d) {
   d.to = parseDate(d.to);
 });
 
-var x = d3.scaleTime().range([0, width]);
+var x = d3.scaleTime().range([50, width]);
 x.domain([
   d3.min(data, function (d) {
     return d.from;
@@ -70,22 +83,24 @@ let xAxis = d3
   .axisBottom(x)
   .tickFormat(d3.timeFormat("%b-%d"))
   .tickSize(3)
-  .tickPadding(10)
-  .tickSizeInner([3]);
-var yAxis = d3.axisLeft(y).ticks(data.length).tickSize(0).tickPadding(10);
+  .ticks(d3.timeWeek.every(2));
+
+var yAxis = d3.axisLeft(y).ticks(data.length).tickSize(0);
 
 var svg = d3
   .select("#gantt")
   .append("svg")
+  .attr("class", "gantt")
   .attr("width", width + margin.left + margin.right)
-  .attr("height", height)
+  .attr("height", h)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 svg
   .append("g")
   .attr("class", "axis1")
-  .attr("transform", "translate(0,250)")
+
+  .attr("transform", "translate(0,-35)")
   .call(xAxis);
 
 let rect = svg
@@ -95,7 +110,7 @@ let rect = svg
   .append("g")
   .append("rect")
   .attr("width", width + 100)
-  .attr("height", 50)
+  .attr("height", barH)
   .attr("x", -100)
   .attr("y", function (d, i) {
     return i * 50;
@@ -125,7 +140,7 @@ var rectangle = svg
   .attr("width", function (d) {
     return x(d.to) - x(d.from);
   })
-  .attr("height", 30)
+  .attr("height", 25)
   .attr("fill", "red")
   .attr("class", "rect")
   .attr("rx", 15)
@@ -141,10 +156,10 @@ svg
   .append("rect")
   .attr("x", -100)
   .attr("y", 0)
-  .attr("width", 100)
-  .attr("height", h)
+  .attr("width", 140)
+  .attr("height", h - 100)
   .attr("stroke", "black")
-  .attr("stroke-width", 0.2)
+  .attr("stroke-width", 0.5)
   .attr("fill", "transparent");
 
 let tasks = svg
@@ -152,10 +167,10 @@ let tasks = svg
   .append("rect")
   .attr("x", -100)
   .attr("y", -35)
-  .attr("width", 100)
+  .attr("width", 140)
   .attr("height", 35)
   .attr("stroke", "black")
-  .attr("stroke-width", 0.2)
+  .attr("stroke-width", 0.9)
   .attr("fill", "transparent");
 
 svg
@@ -168,19 +183,27 @@ svg
 svg
   .append("g")
   .append("rect")
-  .attr("x", 0)
+  .attr("x", 40)
   .attr("y", -35)
-  .attr("width", width)
+  .attr("width", width - 40)
   .attr("height", 35)
   .attr("stroke", "black")
-  .attr("stroke-width", 0.2)
+  .attr("stroke-width", 0.9)
   .attr("fill", "transparent");
 
-svg
+var line = svg
+  .append("g")
+  .selectAll("text.value")
+  .data(data)
+  .enter()
   .append("text")
-  .attr("class", "tasks")
-  .text("Simple Gantt Chart")
-  .attr("x", width / 2 - 100)
-  .attr("y", -15);
-
-svg.append("g").attr("class", "axis2").call(yAxis);
+  .attr("x", -100)
+  .attr("y", function (d, i) {
+    return i * 50;
+  })
+  .text(function (d) {
+    return d.category;
+  })
+  .style("fill", "rgb(32, 32, 32)")
+  .style("font-size", "11px")
+  .attr("transform", "translate(5,30)");
