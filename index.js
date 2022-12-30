@@ -8,7 +8,7 @@ var data = [
     progress: 100,
   },
   {
-    category: "Check on Banana in kaptogolo",
+    category: "Check on Banana",
     from: "13-Jan-17",
     to: "1-Feb-17",
     progress: 60,
@@ -43,14 +43,21 @@ var data = [
     to: "20-Jul-17",
     progress: 90,
   },
+  {
+    category: "Admin Lte",
+    from: "1-May-17",
+    to: "20-Jul-17",
+    progress: 90,
+  },
 ];
 let color = ["gray", "white"];
 var margin = {top: 50, right: 0, bottom: 50, left: 100},
   width = 900 - margin.left - margin.right,
   height = 450 - margin.top - margin.bottom;
-h = data.length * 50 + 100;
-barH = 50;
+h = data.length * 30 + 50;
+barH = 30;
 
+// Randomize colors
 function getRandomColor() {
   var letters = "0123456789ABCDEF".split("");
   var color = "#";
@@ -64,7 +71,8 @@ data.forEach(function (d) {
   d.to = parseDate(d.to);
 });
 
-var x = d3.scaleTime().range([50, width]);
+// x - axes
+var x = d3.scaleTime().range([40, width]);
 x.domain([
   d3.min(data, function (d) {
     return d.from;
@@ -74,11 +82,12 @@ x.domain([
   }),
 ]);
 
+// y-axes
 let y = d3
   .scaleBand()
   .domain(data.map((task) => task.category))
   .range([0, h]);
-
+// x-axes ticks
 let xAxis = d3
   .axisBottom(x)
   .tickFormat(d3.timeFormat("%b-%d"))
@@ -86,7 +95,7 @@ let xAxis = d3
   .ticks(d3.timeWeek.every(2));
 
 var yAxis = d3.axisLeft(y).ticks(data.length).tickSize(0);
-
+// initialize svg
 var svg = d3
   .select("#gantt")
   .append("svg")
@@ -110,10 +119,10 @@ let rect = svg
   .append("g")
   .append("rect")
   .attr("width", width + 100)
-  .attr("height", barH)
+  .attr("height", 30)
   .attr("x", -100)
   .attr("y", function (d, i) {
-    return i * 50;
+    return i * 30;
   })
   .attr("fill", function (d, i) {
     if (i % 2 == 0) {
@@ -135,12 +144,12 @@ var rectangle = svg
     return x(d.from);
   })
   .attr("y", function (d, i) {
-    return i * 50;
+    return i * 30;
   })
   .attr("width", function (d) {
     return x(d.to) - x(d.from);
   })
-  .attr("height", 25)
+  .attr("height", 20)
   .attr("fill", "red")
   .attr("class", "rect")
   .attr("rx", 15)
@@ -148,7 +157,7 @@ var rectangle = svg
   .attr("fill", function (d) {
     return getRandomColor();
   })
-  .attr("transform", "translate(0,10)");
+  .attr("transform", "translate(0,5)");
 
 svg.append("g").selectAll("rect");
 
@@ -156,10 +165,10 @@ svg
   .append("rect")
   .attr("x", -100)
   .attr("y", 0)
-  .attr("width", 145)
-  .attr("height", h - 100)
+  .attr("width", 140)
+  .attr("height", h - 52)
   .attr("stroke", "black")
-  .attr("stroke-width", 0.5)
+  .attr("stroke-width", 0.1)
   .attr("fill", "transparent");
 
 let tasks = svg
@@ -167,10 +176,10 @@ let tasks = svg
   .append("rect")
   .attr("x", -100)
   .attr("y", -35)
-  .attr("width", 145)
+  .attr("width", 140)
   .attr("height", 35)
   .attr("stroke", "black")
-  .attr("stroke-width", 0.9)
+  .attr("stroke-width", 0.1)
   .attr("fill", "transparent");
 
 svg
@@ -183,12 +192,12 @@ svg
 svg
   .append("g")
   .append("rect")
-  .attr("x", 45)
+  .attr("x", 40)
   .attr("y", -35)
-  .attr("width", width - 45)
+  .attr("width", width - 40)
   .attr("height", 35)
   .attr("stroke", "black")
-  .attr("stroke-width", 0.9)
+  .attr("stroke-width", 0.1)
   .attr("fill", "transparent");
 
 var line = svg
@@ -199,11 +208,21 @@ var line = svg
   .append("text")
   .attr("x", -100)
   .attr("y", function (d, i) {
-    return i * 50;
+    return i * 30;
   })
   .text(function (d) {
     return d.category;
   })
   .style("fill", "rgb(32, 32, 32)")
   .style("font-size", "11px")
-  .attr("transform", "translate(5,30)");
+  .attr("transform", "translate(5,20)");
+
+// line
+svg
+  .append("line")
+  .style("stroke", "red")
+  .style("stroke-width", 3)
+  .attr("x1", 200)
+  .attr("y1", 0)
+  .attr("x2", 200)
+  .attr("y2", 200);
