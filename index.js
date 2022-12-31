@@ -8,7 +8,7 @@ var data = [
     progress: 100,
   },
   {
-    category: "Check on Banana",
+    category: "Check on Bananas Kaptogolo",
     from: "13-Jan-17",
     to: "1-Feb-17",
     progress: 60,
@@ -35,6 +35,12 @@ var data = [
     category: "Testing",
     from: "1-Mar-17",
     to: "30-May-17",
+    progress: 90,
+  },
+  {
+    category: "Admin Lte",
+    from: "1-May-17",
+    to: "20-Jul-17",
     progress: 90,
   },
   {
@@ -134,6 +140,7 @@ let rect = svg
   .attr("stroke", "black")
   .attr("stroke-width", 0.2);
 
+// rectangles to display tasks to and from
 var rectangle = svg
   .append("g")
   .selectAll("rect")
@@ -182,6 +189,7 @@ let tasks = svg
   .attr("stroke-width", 0.1)
   .attr("fill", "transparent");
 
+// tasks list header
 svg
   .append("text")
   .attr("class", "tasks")
@@ -200,6 +208,7 @@ svg
   .attr("stroke-width", 0.1)
   .attr("fill", "transparent");
 
+// task list
 var line = svg
   .append("g")
   .selectAll("text.value")
@@ -218,11 +227,3 @@ var line = svg
   .attr("transform", "translate(5,20)");
 
 // line
-svg
-  .append("line")
-  .style("stroke", "red")
-  .style("stroke-width", 3)
-  .attr("x1", 200)
-  .attr("y1", 0)
-  .attr("x2", 200)
-  .attr("y2", 200);

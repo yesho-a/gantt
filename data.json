@@ -1,0 +1,50 @@
+[
+  {
+    "category": "Weed Eucalyptus in chepterit",
+    "from": "1-Jan-17",
+    "to": "15-Jan-17",
+    "progress": 100
+  },
+  {
+    "category": "Check on Banana",
+    "from": "13-Jan-17",
+    "to": "1-Feb-17",
+    "progress": 60
+  },
+  {
+    "category": "Contact Sande",
+    "from": "1-Feb-17",
+    "to": "15-Feb-17",
+    "progress": 70
+  },
+  {
+    "category": "Meet Ivan",
+    "from": "10-Feb-17",
+    "to": "1-Mar-17",
+    "progress": 10
+  },
+  {
+    "category": "Elephant grass",
+    "from": "1-Mar-17",
+    "to": "30-Apr-17",
+    "progress": 90
+  },
+  {
+    "category": "Testing",
+    "from": "1-Mar-17",
+    "to": "30-May-17",
+    "progress": 90
+  },
+  {
+    "category": "Admin Lte",
+    "from": "1-May-17",
+    "to": "20-Jul-17",
+    "progress": 90
+  },
+  {
+    "category": "Admin Lte",
+    "from": "1-May-17",
+    "to": "20-Jul-17",
+    "progress": 90
+  }
+]
