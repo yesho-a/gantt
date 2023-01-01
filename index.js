@@ -117,19 +117,19 @@ d3.json("data.json", function (data) {
       return getRandomColor();
     })
     .attr("transform", "translate(0,5)")
-    .on("mouseover", function (event, d) {
+    .on("mouseover", function (d, i) {
       console.log(d);
       tooltip.transition().duration(200).style("opacity", 0.7);
       tooltip
         .html(
           "<b>Task:</b> " +
-            d.name +
+            d.category +
             "<br>" +
             "<b>From: </b>" +
-            d.from.toDateString() +
+            d.from +
             "<br>" +
             "<b>To: </b>" +
-            d.to.toDateString(),
+            d.to,
         )
         .style("left", event.pageX + 3 + "px")
         .style("top", event.pageY + 10 + "px");
