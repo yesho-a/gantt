@@ -85,6 +85,14 @@ d3.json("data.json", function (data) {
     .attr("stroke", "black")
     .attr("stroke-width", 0.2);
 
+  // Create the tooltip
+  const tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .attr("id", "tooltip")
+    .style("opacity", 100);
+
   var rectangle = svg
     .append("g")
     .selectAll("rect")
@@ -108,7 +116,28 @@ d3.json("data.json", function (data) {
     .attr("fill", function (d) {
       return getRandomColor();
     })
-    .attr("transform", "translate(0,5)");
+    .attr("transform", "translate(0,5)")
+    .on("mouseover", function (event, d) {
+      console.log(d);
+      tooltip.transition().duration(200).style("opacity", 0.7);
+      tooltip
+        .html(
+          "<b>Task:</b> " +
+            d.name +
+            "<br>" +
+            "<b>From: </b>" +
+            d.from.toDateString() +
+            "<br>" +
+            "<b>To: </b>" +
+            d.to.toDateString(),
+        )
+        .style("left", event.pageX + 3 + "px")
+        .style("top", event.pageY + 10 + "px");
+    })
+    .on("mouseout", function (d) {
+      //d3.select(this).classed("selected", false);
+      tooltip.transition().duration(400).style("opacity", 0);
+    });
 
   svg.append("g").selectAll("rect");
 

@@ -15,3 +15,16 @@
 .tasks {
   font-weight: bold;
 }
+
+.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 10px 10px 10px 10px;
+  font: 14px sans-serif;
+  background-color: rgb(155, 255, 221);
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
