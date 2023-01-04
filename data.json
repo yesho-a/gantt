@@ -46,5 +46,10 @@
     "from": "1-May-17",
     "to": "20-Jul-17",
     "progress": 90
+  },
+  {
+    "category": "Milestone",
+    "from": "1-May-17",
+    "progress": 90
   }
 ]
