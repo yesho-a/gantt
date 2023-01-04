@@ -1,7 +1,6 @@
 var parseDate = d3.timeParse("%d-%b-%y");
 
 d3.json("data.json", function (data) {
-  console.log(data);
   let color = ["gray", "white"];
   var margin = {top: 50, right: 0, bottom: 50, left: 100};
   var width = 900 - margin.left - margin.right;
@@ -39,6 +38,8 @@ d3.json("data.json", function (data) {
     .scaleBand()
     .domain(data.map((task) => task.category))
     .range([0, h]);
+
+  console.log(y);
   // x-axes ticks
   let xAxis = d3
     .axisBottom(x)
@@ -57,6 +58,7 @@ d3.json("data.json", function (data) {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  // draw x-axis
   svg
     .append("g")
     .attr("class", "axis1")
@@ -64,6 +66,7 @@ d3.json("data.json", function (data) {
     .attr("transform", "translate(0,-35)")
     .call(xAxis);
 
+  // background rectangles
   let rect = svg
     .selectAll("rect")
     .data(data)
@@ -93,8 +96,27 @@ d3.json("data.json", function (data) {
     .attr("class", "tooltip")
     .attr("id", "tooltip")
     .style("opacity", 100);
+  // tasks rectangles
 
-  var rectangle = svg
+  data.forEach(function (d) {
+    if (d.to !== null) {
+    } else {
+      //"translate(" + margin.left + "," + margin.top + ")"
+      var sym = d3.symbol().type(d3.symbolDiamond).size(150);
+      let mile = x(d.from);
+      console.log(y(d.from));
+
+      svg
+
+        .append("g")
+        .append("path")
+        .attr("d", sym)
+        .attr("fill", "red")
+        .attr("transform", "translate(" + mile + ",20)");
+    }
+  });
+
+  svg
     .append("g")
     .selectAll("rect")
     .data(data)
@@ -211,19 +233,4 @@ d3.json("data.json", function (data) {
     .attr("y1", -35)
     .attr("x2", today)
     .attr("y2", h);
-
-  let q = today + 20;
-  var sym = d3.symbol().type(d3.symbolDiamond).size(150);
-  svg
-    .selectAll(".shapes")
-    .data(data)
-    .enter()
-    .append("g")
-    .append("path")
-    .attr("d", sym)
-    .attr("fill", "red")
-    .attr("transform", function (d, index) {
-      let fro = x(d.from);
-      return "translate(" + fro + ", " + (15 + index * 30) + ")";
-    });
 });
